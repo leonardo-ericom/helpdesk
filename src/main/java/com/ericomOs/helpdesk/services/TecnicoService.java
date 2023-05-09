@@ -1,5 +1,6 @@
 package com.ericomOs.helpdesk.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,12 @@ public class TecnicoService {
 
 	public Tecnico findById(Integer id) {
 		Optional<Tecnico> obj = repository.findById(id);
-		return obj.orElseThrow (() -> new ObjectnotFoundException("Objeto não encontrado! Id: " + id));
-		
+		return obj.orElseThrow(() -> new ObjectnotFoundException("Objeto não encontrado! Id: " + id));
+
+	}
+
+	public List<Tecnico> findAll() {
+
+		return repository.findAll();
 	}
 }

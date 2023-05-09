@@ -1,4 +1,5 @@
 package com.ericomOs.helpdesk.domain;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -20,23 +21,23 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 public abstract class Pessoa implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer id;
 	protected String nome;
-	
+
 	@Column(unique = true)
 	protected String cpf;
-	
+
 	@Column(unique = true)
 	protected String email;
 	protected String senha;
-	
+
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "PERFIS")
 	protected Set<Integer> perfis = new HashSet<>();
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	protected LocalDate dataCriacao = LocalDate.now();
 
@@ -140,6 +141,12 @@ public abstract class Pessoa implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public interface CpfGroup {
+	}
+
+	public interface CnpjGroup {
 	}
 
 }

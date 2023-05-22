@@ -16,7 +16,6 @@ import com.ericomOs.helpdesk.repositories.PessoaRepository;
 import com.ericomOs.helpdesk.repositories.TecnicoRepository;
 import com.ericomOs.helpdesk.services.exception.DataIntegrityViolationException;
 import com.ericomOs.helpdesk.services.exception.ObjectnotFoundException;
-
 @Service
 public class TecnicoService {
 
@@ -30,11 +29,9 @@ public class TecnicoService {
 	public Tecnico findById(Integer id) {
 		Optional<Tecnico> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectnotFoundException("Objeto não encontrado! Id: " + id));
-
 	}
 
 	public List<Tecnico> findAll() {
-
 		return repository.findAll();
 	}
 
@@ -45,21 +42,26 @@ public class TecnicoService {
 		Tecnico newObj = new Tecnico(objDTO);
 		return repository.save(newObj);
 	}
-
+ 
 	public Tecnico update(Integer id, @Valid TecnicoDTO objDTO) {
 		objDTO.setId(id);
 		Tecnico oldObj = findById(id);
+		
+		if(!objDTO.getSenha().equals(oldObj.getSenha())) 
+			objDTO.setSenha(encoder.encode(objDTO.getSenha()));
+		
 		validaPorCpfEEmail(objDTO);
 		oldObj = new Tecnico(objDTO);
 		return repository.save(oldObj);
-
 	}
 
 	public void delete(Integer id) {
 		Tecnico obj = findById(id);
+
 		if (obj.getChamados().size() > 0) {
-			throw new DataIntegrityViolationException("Tecnico Possui Ordem de serviço e nao pode ser deletado! ");
+			throw new DataIntegrityViolationException("Técnico possui ordens de serviço e não pode ser deletado!");
 		}
+
 		repository.deleteById(id);
 	}
 

@@ -1,7 +1,7 @@
 package com.ericomOs.helpdesk.domain.dtos;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotNull;
 
@@ -13,34 +13,35 @@ public class ChamadoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDate dataAbertura = LocalDate.now();
-
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDate dataFechamento = LocalDate.now();
-	@NotNull(message = "O campo PRIORIDADE e requerido")
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	private LocalDateTime dataAbertura;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	private LocalDateTime dataFechamento;
+	
+	@NotNull(message = "O campo PRIORIDADE é requerido")
 	private Integer prioridade;
-	@NotNull(message = "O campo STATUS e requerido")
+	@NotNull(message = "O campo STATUS é requerido")
 	private Integer status;
-	@NotNull(message = "O campo TITULO e requerido")
+	@NotNull(message = "O campo TITULO é requerido")
 	private String titulo;
-	@NotNull(message = "O campo OBSERVAÇOES e requerido")
+	@NotNull(message = "O campo OBSERVAÇÕES é requerido")
 	private String observacoes;
-	@NotNull(message = "O campo TECNICO e requerido")
+	@NotNull(message = "O campo TECNICO é requerido")
 	private Integer tecnico;
-	@NotNull(message = "O campo CLIENTE e requerido")
+	@NotNull(message = "O campo CLIENTE é requerido")
 	private Integer cliente;
 	private String nomeTecnico;
 	private String nomeCliente;
 
 	public ChamadoDTO() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public ChamadoDTO(Chamado obj) {
 		this.id = obj.getId();
+	
 		this.dataAbertura = obj.getDataAbertura();
 		this.dataFechamento = obj.getDataFechamento();
 		this.prioridade = obj.getPrioridade().getCodigo();
@@ -61,19 +62,19 @@ public class ChamadoDTO implements Serializable {
 		this.id = id;
 	}
 
-	public LocalDate getDataAbertura() {
+	public LocalDateTime getDataAbertura() {
 		return dataAbertura;
 	}
 
-	public void setDataAbertura(LocalDate dataAbertura) {
+	public void setDataAbertura(LocalDateTime dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
 
-	public LocalDate getDataFechamento() {
+	public LocalDateTime getDataFechamento() {
 		return dataFechamento;
 	}
 
-	public void setDataFechamento(LocalDate dataFechamento) {
+	public void setDataFechamento(LocalDateTime dataFechamento) {
 		this.dataFechamento = dataFechamento;
 	}
 

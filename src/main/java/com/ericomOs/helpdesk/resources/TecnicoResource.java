@@ -22,6 +22,7 @@ import com.ericomOs.helpdesk.domain.Tecnico;
 import com.ericomOs.helpdesk.domain.dtos.TecnicoDTO;
 import com.ericomOs.helpdesk.services.TecnicoService;
 
+
 @RestController
 @RequestMapping(value = "/tecnicos")
 public class TecnicoResource {
@@ -50,7 +51,7 @@ public class TecnicoResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	//@PreAuthorize("hasAnyRole('ADMIN')")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<TecnicoDTO> update(@PathVariable Integer id, @Valid @RequestBody TecnicoDTO objDTO) {
 		Tecnico obj = service.update(id, objDTO);
@@ -66,10 +67,6 @@ public class TecnicoResource {
 
 }
  
-
-
-
-
 
 
 

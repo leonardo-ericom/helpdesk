@@ -15,8 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.hibernate.validator.constraints.br.CPF;
-
 import com.ericomOs.helpdesk.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -29,7 +27,7 @@ public abstract class Pessoa implements Serializable {
 	protected Integer id;
 	protected String nome;
 
-	@CPF
+	
 	@Column(unique = true)
 	protected String cpf;
 
@@ -41,6 +39,7 @@ public abstract class Pessoa implements Serializable {
 	@CollectionTable(name = "PERFIS")
 	protected Set<Integer> perfis = new HashSet<>();
 
+	
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	protected LocalDate dataCriacao = LocalDate.now();
 
@@ -148,8 +147,4 @@ public abstract class Pessoa implements Serializable {
 
 	public interface CpfGroup {
 	}
-
-	public interface CnpjGroup {
-	}
-
 }

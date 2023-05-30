@@ -2,7 +2,7 @@ package com.ericomOs.helpdesk.domain.enums;
 
 public enum Status {
 
-	ABERTO(0, "ABERTO"), ANDAMENTO(1, "ANDAMENTO"), ENCERRADO(2, "ENCERRADO"), PAUSADA(3, "PAUSADA");
+	AGUARDANDO_ATENDIMENTO(0, "AGUARDANDO_ATENDIMENTO"), EM_ATENDIMENTO(1, "EM_ATENDIMENTO"), PAUSADO(2, "PAUSADO"), ENCERRADO(3, "ENCERRADO");
 
 	private Integer codigo;
 	private String descricao;
